@@ -15,8 +15,7 @@
       image_id: ami-09c813fb71547fc4f #replace with your AWS values
       tags:
         Name: "{{ item }}"
-    loop:
-    - "{{ instances }}"
+    loop: "{{ instances }}"
     register: ec2_instances_info
 
   - name: print output
