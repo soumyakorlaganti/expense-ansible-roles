@@ -1,0 +1,20 @@
+- name: create ec2 and r53 records
+  hosts: localhost
+  vars:
+    zone: soumyadevops.space
+  tasks: 
+  - name: create ec2 instances
+    amazon.aws.ec2_instance:
+      instance_type: t2.micro
+      name: "{{ item }}"
+      security_group: allow-all #replace with your AWS values
+      image_id: ami-09c813fb71547fc4f #replace with your AWS values
+      tags:
+        Name: "{{ item }}"
+    loop:
+    - db    
+    - backend
+    - frontend
+    register: ec2_instances_info
+# - name: create r53 records
+#   amazon.aws.route53: 
